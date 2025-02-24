@@ -1,4 +1,4 @@
-# dope_screen
+# dope_app
 
 A new Flutter project.
 
