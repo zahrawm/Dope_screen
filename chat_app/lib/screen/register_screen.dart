@@ -1,32 +1,13 @@
 import 'package:chat_app/components/button.dart';
 import 'package:chat_app/components/textfield.dart';
-import 'package:chat_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
+class RegisterScreen extends StatelessWidget {
   TextEditingController _emailcontroller = TextEditingController();
-
   TextEditingController _passwordController = TextEditingController();
-  void login(BuildContext context) async {
-    final authService = AuthService();
-    try {
-      await authService.signInWithEmailAndPassword(
-          _emailcontroller.text, _passwordController.text);
-    } catch (e) {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: Text(e.toString()),
-              ));
-    }
-  }
+  TextEditingController _confirmedpasswordController = TextEditingController();
+
+  RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +44,18 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(
             height: 25,
           ),
-          Button(text: "Login", onTap: ( )=>login(context)),
+          MyTextField(
+            controller: _confirmedpasswordController,
+            hintText: 'password',
+            obscureText: true,
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Button(
+            text: "Register",
+            onTap: () {},
+          ),
           SizedBox(
             height: 10,
           ),
