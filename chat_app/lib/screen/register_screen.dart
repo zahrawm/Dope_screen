@@ -1,5 +1,7 @@
 import 'package:chat_app/components/button.dart';
 import 'package:chat_app/components/textfield.dart';
+import 'package:chat_app/service/auth_service.dart';
+
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -8,6 +10,27 @@ class RegisterScreen extends StatelessWidget {
   TextEditingController _confirmedpasswordController = TextEditingController();
 
   RegisterScreen({super.key});
+  void register(BuildContext context) {
+    final _auth = AuthService();
+    if (_passwordController == _confirmedpasswordController) {
+      try {
+        _auth.signInWithEmailPassword(
+            _emailcontroller.text, _passwordController.text);
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(e.toString()),
+                ));
+      } //
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('Password does not'),
+              ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +77,7 @@ class RegisterScreen extends StatelessWidget {
           ),
           Button(
             text: "Register",
-            onTap: () {},
+            onTap: () => register(context),
           ),
           SizedBox(
             height: 10,

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:chat_app/components/button.dart';
 import 'package:chat_app/components/textfield.dart';
 import 'package:chat_app/service/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,10 +17,11 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailcontroller = TextEditingController();
 
   TextEditingController _passwordController = TextEditingController();
+
   void login(BuildContext context) async {
     final authService = AuthService();
     try {
-      await authService.signInWithEmailAndPassword(
+      await authService.signInWithEmailPassword(
           _emailcontroller.text, _passwordController.text);
     } catch (e) {
       showDialog(
@@ -63,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(
             height: 25,
           ),
-          Button(text: "Login", onTap: ( )=>login(context)),
+          Button(text: "Login", onTap: () => login(context)),
           SizedBox(
             height: 10,
           ),
